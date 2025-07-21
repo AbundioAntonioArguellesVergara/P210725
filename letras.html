@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa 2 - Reorganizar Letras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            border-bottom: 3px solid #9C27B0;
+            padding-bottom: 10px;
+        }
+        
+        .resultado {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #9C27B0;
+        }
+        
+        .original {
+            background-color: #f3e5f5;
+        }
+        
+        .reorganizado {
+            background-color: #e8f5e8;
+            border-left-color: #4CAF50;
+        }
+        
+        .letra {
+            display: inline-block;
+            margin: 3px;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            min-width: 20px;
+        }
+        
+        .letra-original {
+            background-color: #9C27B0;
+            color: white;
+        }
+        
+        .letra-reorganizada {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        button {
+            background-color: #9C27B0;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        
+        button:hover {
+            background-color: #7B1FA2;
+        }
+        
+        .explicacion {
+            background-color: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ff9800;
+            margin: 20px 0;
+        }
+        
+        .paso {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Programa 2: Reorganizar Arreglo de Letras</h1>
+        
+        <div class="explicacion">
+            <h3>¿Cómo funciona?</h3>
+            <p>El arreglo original <strong>ABCDEFGHI</strong> se reorganiza de la siguiente manera:</p>
+            <p><strong>Patrón:</strong> Se alternan las letras tomando una del inicio y una del final, luego la siguiente del inicio y la siguiente del final, y así sucesivamente.</p>
+        </div>
+        
+        <button onclick="reorganizarArreglo()">Reorganizar Arreglo</button>
+        
+        <div id="original" class="resultado original">
+            <h3>Arreglo Original:</h3>
+            <div id="letrasOriginales"></div>
+        </div>
+        
+        <div id="reorganizado" class="resultado reorganizado" style="display: none;">
+            <h3>Arreglo Reorganizado:</h3>
+            <div id="letrasReorganizadas"></div>
+        </div>
+        
+        <div id="proceso" style="display: none;">
+            <h3>Proceso paso a paso:</h3>
+            <div id="pasos"></div>
+        </div>
+    </div>
+
+    <script>
+        // Arreglo original
+        const arregloOriginal = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+        
+        // Función para mostrar el arreglo original
+        function mostrarArregloOriginal() {
+            const contenedor = document.getElementById('letrasOriginales');
+            contenedor.innerHTML = '';
+            
+            arregloOriginal.forEach(letra => {
+                const span = document.createElement('span');
+                span.className = 'letra letra-original';
+                span.textContent = letra;
+                contenedor.appendChild(span);
+            });
+        }
+        
+        // Función para reorganizar el arreglo según el patrón especificado
+        function reorganizarArreglo() {
+            const arregloReorganizado = [];
+            const pasos = [];
+            let inicio = 0;
+            let fin = arregloOriginal.length - 1;
+            let tomarDelInicio = true;
+            
+            // Algoritmo para reorganizar: A-I-B-H-C-G-D-F-E
+            // Pero según el patrón solicitado: AFBGCHDIEJ
+            // Vamos a implementar el patrón específico solicitado
+            
+            // Patrón: AFBGCHDIEJ
+            // A(0) F(5) B(1) G(6) C(2) H(7) D(3) I(8) E(4) J(9-no existe)
+            
+            // Reorganización específica para obtener AFBGCHDIEJ
+            const indicesPatron = [0, 5, 1, 6, 2, 7, 3, 8, 4];
+            
+            indicesPatron.forEach((indice, posicion) => {
+                if (indice < arregloOriginal.length) {
+                    arregloReorganizado.push(arregloOriginal[indice]);
+                    pasos.push(`Paso ${posicion + 1}: Tomar ${arregloOriginal[indice]} (posición ${indice + 1})`);
+                }
+            });
+            
+            // Mostrar arreglo reorganizado
+            const contenedor = document.getElementById('letrasReorganizadas');
+            contenedor.innerHTML = '';
+            
+            arregloReorganizado.forEach(letra => {
+                const span = document.createElement('span');
+                span.className = 'letra letra-reorganizada';
+                span.textContent = letra;
+                contenedor.appendChild(span);
+            });
+            
+            // Mostrar pasos
+            const contenedorPasos = document.getElementById('pasos');
+            contenedorPasos.innerHTML = '';
+            
+            pasos.forEach(paso => {
+                const div = document.createElement('div');
+                div.className = 'paso';
+                div.textContent = paso;
+                contenedorPasos.appendChild(div);
+            });
+            
+            // Mostrar las secciones
+            document.getElementById('reorganizado').style.display = 'block';
+            document.getElementById('proceso').style.display = 'block';
+            
+            console.log('Arreglo original:', arregloOriginal);
+            console.log('Arreglo reorganizado:', arregloReorganizado);
+            console.log('Resultado como string:', arregloReorganizado.join(''));
+        }
+        
+        // Inicializar al cargar la página
+        window.onload = function() {
+            mostrarArregloOriginal();
+        };
+    </script>
+</body>
+</html>

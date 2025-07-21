@@ -1,0 +1,256 @@
+<?php
+// Programa 3: Conversión de decimal a binario
+$numeroDecimal = '';
+$arregloBinario = [];
+$pasos = [];
+$error = '';
+$mostrarResultados = false;
+
+// Procesar formulario
+if ($_POST['accion'] ?? '' === 'convertir') {
+    $numeroDecimal = $_POST['numero'] ?? '';
+    
+    // Validaciones
+    if (!is_numeric($numeroDecimal) || $numeroDecimal < 0 || $numeroDecimal != (int)$numeroDecimal) {
+        $error = 'Por favor, ingresa un número decimal válido (entero mayor o igual a 0)';
+    } else {
+        $numeroDecimal = (int)$numeroDecimal;
+        $mostrarResultados = true;
+        
+        // Caso especial para el número 0
+        if ($numeroDecimal === 0) {
+            $arregloBinario = [0];
+            $pasos[] = 'El número 0 en binario es 0';
+        } else {
+            // Algoritmo de conversión decimal a binario
+            $numero = $numeroDecimal;
+            $posicion = 0;
+            
+            while ($numero > 0) {
+                $residuo = $numero % 2;
+                array_unshift($arregloBinario, $residuo); // Agregar al inicio del arreglo
+                
+                $pasos[] = "Paso " . ($posicion + 1) . ": $numero ÷ 2 = " . intval($numero / 2) . " residuo $residuo";
+                
+                $numero = intval($numero / 2);
+                $posicion++;
+            }
+        }
+    }
+} elseif ($_POST['accion'] ?? '' === 'ejemplo') {
+    $numeroDecimal = 25;
+    $mostrarResultados = true;
+    
+    // Conversión del ejemplo
+    $numero = $numeroDecimal;
+    $posicion = 0;
+    
+    while ($numero > 0) {
+        $residuo = $numero % 2;
+        array_unshift($arregloBinario, $residuo);
+        
+        $pasos[] = "Paso " . ($posicion + 1) . ": $numero ÷ 2 = " . intval($numero / 2) . " residuo $residuo";
+        
+        $numero = intval($numero / 2);
+        $posicion++;
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa 3 - Conversión Decimal a Binario (PHP)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            border-bottom: 3px solid #2196F3;
+            padding-bottom: 10px;
+        }
+        
+        .input-section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #2196F3;
+        }
+        
+        .resultado {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .decimal {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196F3;
+        }
+        
+        .binario {
+            background-color: #e8f5e8;
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .proceso {
+            background-color: #fff3e0;
+            border-left: 5px solid #ff9800;
+        }
+        
+        input[type="number"] {
+            width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+        
+        button {
+            background-color: #2196F3;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 5px;
+        }
+        
+        button:hover {
+            background-color: #1976D2;
+        }
+        
+        .digito {
+            display: inline-block;
+            margin: 3px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .paso {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border-left: 3px solid #ff9800;
+        }
+        
+        .arreglo-info {
+            background-color: #e1f5fe;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .php-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #6c757d;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Programa 3: Conversión de Decimal a Binario (PHP)</h1>
+        
+        <div class="php-info">
+            <h3>🐘 Información PHP:</h3>
+            <p><strong>Versión PHP:</strong> <?php echo phpversion(); ?></p>
+            <p><strong>Funciones utilizadas:</strong> array_unshift(), intval(), implode()</p>
+            <p><strong>Fecha/Hora:</strong> <?php echo date('Y-m-d H:i:s'); ?></p>
+        </div>
+        
+        <div class="input-section">
+            <h3>Ingresa un número decimal:</h3>
+            <form method="post">
+                <input type="number" name="numero" placeholder="Ejemplo: 25" min="0" max="1000" 
+                       value="<?php echo htmlspecialchars($numeroDecimal); ?>">
+                <button type="submit" name="accion" value="convertir">Convertir a Binario</button>
+                <button type="submit" name="accion" value="ejemplo">Usar Ejemplo (25)</button>
+            </form>
+        </div>
+        
+        <?php if (!empty($error)): ?>
+            <div class="error"><?php echo htmlspecialchars($error); ?></div>
+        <?php endif; ?>
+        
+        <?php if ($mostrarResultados && empty($error)): ?>
+            <div class="resultado decimal">
+                <h3>Número Decimal:</h3>
+                <span class="digito" style="background-color: #2196F3; font-size: 24px;"><?php echo $numeroDecimal; ?></span>
+                <p><strong>Valor en PHP:</strong> <?php echo $numeroDecimal; ?> (tipo: <?php echo gettype($numeroDecimal); ?>)</p>
+            </div>
+            
+            <div class="resultado binario">
+                <h3>Número Binario:</h3>
+                <div>
+                    <?php foreach ($arregloBinario as $index => $digito): ?>
+                        <span class="digito" title="Posición <?php echo $index; ?>: <?php echo $digito; ?>">
+                            <?php echo $digito; ?>
+                        </span>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            
+            <div class="arreglo-info">
+                <h3>Arreglo de Dígitos Binarios:</h3>
+                <p><strong>Arreglo PHP:</strong> [<?php echo implode(', ', $arregloBinario); ?>]</p>
+                <p><strong>Longitud:</strong> <?php echo count($arregloBinario); ?> dígitos</p>
+                <p><strong>Número binario como string:</strong> <?php echo implode('', $arregloBinario); ?></p>
+                <p><strong>Verificación con decbin():</strong> <?php echo decbin($numeroDecimal); ?></p>
+                <p><strong>Verificación correcta:</strong> <?php echo (implode('', $arregloBinario) === decbin($numeroDecimal)) ? '✅ Sí' : '❌ No'; ?></p>
+            </div>
+            
+            <div class="resultado proceso">
+                <h3>Proceso de Conversión:</h3>
+                <?php 
+                $pasosInvertidos = array_reverse($pasos);
+                foreach ($pasosInvertidos as $paso): 
+                ?>
+                    <div class="paso"><?php echo htmlspecialchars($paso); ?></div>
+                <?php endforeach; ?>
+                
+                <div class="paso">
+                    <strong>Resultado:</strong> Los residuos leídos de abajo hacia arriba forman el número binario: <?php echo implode('', $arregloBinario); ?>
+                </div>
+                
+                <div class="paso" style="background-color: #e8f5e8;">
+                    <strong>Análisis PHP:</strong><br>
+                    • Número decimal original: <?php echo $numeroDecimal; ?><br>
+                    • Número binario calculado: <?php echo implode('', $arregloBinario); ?><br>
+                    • Verificación con función nativa: <?php echo decbin($numeroDecimal); ?><br>
+                    • Total de divisiones realizadas: <?php echo count($pasos); ?><br>
+                    • Conversión de vuelta a decimal: <?php echo bindec(implode('', $arregloBinario)); ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</body>
+</html>

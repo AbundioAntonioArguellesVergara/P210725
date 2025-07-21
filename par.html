@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa 1 - Números Pares e Impares</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        
+        .resultado {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .arreglo {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .pares {
+            background-color: #e8f5e8;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .impares {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .numero {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .par {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .impar {
+            background-color: #ff9800;
+            color: white;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Programa 1: Identificar Números Pares e Impares</h1>
+        
+        <button onclick="generarArreglo()">Generar Nuevo Arreglo</button>
+        <button onclick="mostrarResultados()">Mostrar Pares e Impares</button>
+        
+        <div id="arreglo" class="resultado arreglo">
+            <h3>Arreglo Original:</h3>
+            <div id="numerosOriginales"></div>
+        </div>
+        
+        <div id="pares" class="resultado pares" style="display: none;">
+            <h3>Números Pares:</h3>
+            <div id="numerosPares"></div>
+        </div>
+        
+        <div id="impares" class="resultado impares" style="display: none;">
+            <h3>Números Impares:</h3>
+            <div id="numerosImpares"></div>
+        </div>
+    </div>
+
+    <script>
+        let arreglo = [];
+        
+        // Función para generar un arreglo de 10 elementos aleatorios
+        function generarArreglo() {
+            arreglo = [];
+            for (let i = 0; i < 10; i++) {
+                arreglo.push(Math.floor(Math.random() * 100) + 1);
+            }
+            mostrarArregloOriginal();
+            ocultarResultados();
+        }
+        
+        // Función para mostrar el arreglo original
+        function mostrarArregloOriginal() {
+            const contenedor = document.getElementById('numerosOriginales');
+            contenedor.innerHTML = '';
+            
+            arreglo.forEach(numero => {
+                const span = document.createElement('span');
+                span.className = 'numero';
+                span.textContent = numero;
+                contenedor.appendChild(span);
+            });
+        }
+        
+        // Función para identificar y mostrar pares e impares
+        function mostrarResultados() {
+            if (arreglo.length === 0) {
+                alert('Primero genera un arreglo');
+                return;
+            }
+            
+            const pares = [];
+            const impares = [];
+            
+            // Clasificar números en pares e impares
+            arreglo.forEach(numero => {
+                if (numero % 2 === 0) {
+                    pares.push(numero);
+                } else {
+                    impares.push(numero);
+                }
+            });
+            
+            // Mostrar números pares
+            const contenedorPares = document.getElementById('numerosPares');
+            contenedorPares.innerHTML = '';
+            pares.forEach(numero => {
+                const span = document.createElement('span');
+                span.className = 'numero par';
+                span.textContent = numero;
+                contenedorPares.appendChild(span);
+            });
+            
+            // Mostrar números impares
+            const contenedorImpares = document.getElementById('numerosImpares');
+            contenedorImpares.innerHTML = '';
+            impares.forEach(numero => {
+                const span = document.createElement('span');
+                span.className = 'numero impar';
+                span.textContent = numero;
+                contenedorImpares.appendChild(span);
+            });
+            
+            // Mostrar las secciones de resultados
+            document.getElementById('pares').style.display = 'block';
+            document.getElementById('impares').style.display = 'block';
+            
+            console.log('Arreglo original:', arreglo);
+            console.log('Números pares:', pares);
+            console.log('Números impares:', impares);
+        }
+        
+        // Función para ocultar resultados
+        function ocultarResultados() {
+            document.getElementById('pares').style.display = 'none';
+            document.getElementById('impares').style.display = 'none';
+        }
+        
+        // Generar arreglo inicial al cargar la página
+        window.onload = function() {
+            generarArreglo();
+        };
+    </script>
+</body>
+</html>

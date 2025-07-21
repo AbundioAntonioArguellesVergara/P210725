@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programas - HTML y PHP</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .program-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .program-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .program-description {
+            color: #666;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+        
+        .versions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .btn-html {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+        }
+        
+        .btn-html:hover {
+            background: linear-gradient(45deg, #FF5252, #26C6DA);
+            transform: scale(1.05);
+        }
+        
+        .btn-php {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-php:hover {
+            background: linear-gradient(45deg, #5a6fd8, #6a4190);
+            transform: scale(1.05);
+        }
+        
+        .info-section {
+            background: #e3f2fd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            border-left: 5px solid #2196F3;
+        }
+        
+        .tech-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .badge-html {
+            background: #FF6B6B;
+            color: white;
+        }
+        
+        .badge-css {
+            background: #4ECDC4;
+            color: white;
+        }
+        
+        .badge-js {
+            background: #FFE66D;
+            color: #333;
+        }
+        
+        .badge-php {
+            background: #667eea;
+            color: white;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Programas de Programación</h1>
+        <p class="subtitle">Colección de programas en HTML + JavaScript y PHP</p>
+        
+        <div class="tech-badges">
+            <span class="badge badge-html">HTML5</span>
+            <span class="badge badge-css">CSS3</span>
+            <span class="badge badge-js">JavaScript</span>
+            <span class="badge badge-php">PHP</span>
+        </div>
+        
+        <div class="info-section">
+            <h3>📋 Descripción del Proyecto</h3>
+            <p>Esta colección incluye 3 programas desarrollados en dos tecnologías diferentes:</p>
+            <ul>
+                <li><strong>Versión HTML:</strong> Programas completos con HTML5, CSS3 y JavaScript integrados</li>
+                <li><strong>Versión PHP:</strong> Programas del lado del servidor con PHP y formularios HTML</li>
+            </ul>
+        </div>
+        
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="program-title">🔢 Programa 1: Números Pares e Impares</div>
+                <div class="program-description">
+                    Genera un arreglo de 10 elementos aleatorios e identifica cuáles son números pares y cuáles son impares, mostrando estadísticas detalladas.
+                </div>
+                <div class="versions">
+                    <a href="programa1_pares_impares.html" class="btn btn-html">📄 Versión HTML</a>
+                    <a href="programa1_pares_impares.php" class="btn btn-php">🐘 Versión PHP</a>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-title">🔤 Programa 2: Reorganizar Letras</div>
+                <div class="program-description">
+                    Toma el arreglo ABCDEFGHI y lo reorganiza siguiendo un patrón específico para obtener AFBGCHDIEJ, mostrando el proceso paso a paso.
+                </div>
+                <div class="versions">
+                    <a href="programa2_reorganizar_letras.html" class="btn btn-html">📄 Versión HTML</a>
+                    <a href="programa2_reorganizar_letras.php" class="btn btn-php">🐘 Versión PHP</a>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-title">🔢 Programa 3: Decimal a Binario</div>
+                <div class="program-description">
+                    Convierte números decimales a binario y almacena los dígitos en un arreglo, mostrando el proceso completo de conversión con verificaciones.
+                </div>
+                <div class="versions">
+                    <a href="programa3_decimal_binario.html" class="btn btn-html">📄 Versión HTML</a>
+                    <a href="programa3_decimal_binario.php" class="btn btn-php">🐘 Versión PHP</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h3>⚙️ Características Técnicas</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                <div>
+                    <h4>🌐 Versiones HTML:</h4>
+                    <ul>
+                        <li>Interfaz interactiva con JavaScript</li>
+                        <li>Procesamiento en tiempo real</li>
+                        <li>Validaciones del lado del cliente</li>
+                        <li>Diseño responsive con CSS3</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>🐘 Versiones PHP:</h4>
+                    <ul>
+                        <li>Procesamiento del lado del servidor</li>
+                        <li>Manejo de formularios POST</li>
+                        <li>Uso de sesiones PHP</li>
+                        <li>Validaciones del lado del servidor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📅 Desarrollado el 21 de julio de 2025 | 💻 Programación P210725</p>
+            <p>🎯 Programas educativos para aprender algoritmos y estructuras de datos</p>
+        </div>
+    </div>
+</body>
+</html>
